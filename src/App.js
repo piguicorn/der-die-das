@@ -2,6 +2,7 @@ import { HomeMenu } from './components/HomeMenu';
 import { AddWord } from './components/AddWord';
 import { EditWord } from './components/EditWord';
 import { WordList } from './components/WordList';
+import { Game } from './components/Game';
 import { useState, useEffect } from 'react';
 
 const App = () => {
@@ -58,6 +59,7 @@ const App = () => {
                 screen === 'add' ? <AddWord setScreen={setScreen} createWord={createWord}/> 
                 : screen === 'list' ? <WordList setScreen={setScreen} words={words} deleteWord={deleteWord} editWord={editWord}/> 
                 : screen === 'edit' ? <EditWord setScreen={setScreen} wordToEdit={wordToEdit} updateWord={updateWord}/>
+                : screen === 'play' ? <Game words={words} />
                 : <HomeMenu setScreen={setScreen} /> 
             }
         </main>
