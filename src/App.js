@@ -59,7 +59,7 @@ const App = () => {
                 screen === 'add' ? <AddWord setScreen={setScreen} createWord={createWord}/> 
                 : screen === 'list' ? <WordList setScreen={setScreen} words={words} deleteWord={deleteWord} editWord={editWord}/> 
                 : screen === 'edit' ? <EditWord setScreen={setScreen} wordToEdit={wordToEdit} updateWord={updateWord}/>
-                : screen === 'play' ? <Game words={words} />
+                : screen === 'play' ? <Game setScreen={setScreen} words={words} />
                 : <HomeMenu setScreen={setScreen} /> 
             }
         </main>

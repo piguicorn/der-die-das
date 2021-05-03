@@ -1,9 +1,13 @@
 import { useState, useEffect } from 'react';
 
-const GameMenu = ({setWordsQuantity}) => {
+const GameMainMenu = ({setWordsQuantity, setScreen}) => {
     return (
         <section>
-            <h1>Game Menu</h1>
+            <div className="screen__title">
+                <h1>Game Menu</h1>
+                <button onClick={() => setScreen('home')}>X</button>
+            </div>
+
             <div>
                 <button onClick={() => setWordsQuantity(20)}>20</button>
                 <button onClick={() => setWordsQuantity(50)}>50</button>
@@ -14,37 +18,47 @@ const GameMenu = ({setWordsQuantity}) => {
     );
 }
 
-const Game = ({words}) => {
+const WordScreen = ({word}) => {
+    console.log(word);
+
+    return (
+        <p>word</p>
+    );
+};
+
+const Game = ({words, setScreen}) => {
     // states
     const [ wordsQuantity, setWordsQuantity ] = useState(0);
     const [ playing, setPlaying ] = useState(false);
-    const [ wordsInGame, setWordsInGame ] = useState([]);
+    const [ currentWord, setCurrentWord ] = useState(null);
 
     // functions
     const sortRandomly = (a, b) => 0.5 - Math.random(); 
 
     const generateWords = () => {
         let wordsCopy = [...words];
-        const wordsArr = [];
+        let wordsInGame = [];
+        
 
-        while (wordsArr.length < wordsQuantity) {
+        while (wordsInGame.length < wordsQuantity) {
             if (wordsCopy.length === 0) {
                 wordsCopy = [...words]
             }
 
-            wordsArr.push(wordsCopy.sort(sortRandomly).pop());
+            wordsInGame.push(wordsCopy.sort(sortRandomly).pop());
         }
 
-        setWordsInGame(wordsArr);
+        return wordsInGame;
     };
 
     const startGame = () => {
-        generateWords();
+        const wordsInGame = generateWords();
+
+        console.log("holi");
     };
 
     // use effect
     useEffect(() => {
-        console.log(wordsInGame);
 
         if (wordsQuantity > 0 && !playing) {
             setPlaying(true);
@@ -56,7 +70,14 @@ const Game = ({words}) => {
     }, [wordsQuantity]);
 
     return (
-        <GameMenu setWordsQuantity={setWordsQuantity} />
+        <main>
+            { !playing ? 
+                <GameMainMenu setWordsQuantity={setWordsQuantity} setScreen={setScreen}/> :
+                <p>{wordsQuantity}</p>
+            }
+
+        </main>
+
     )
 };
 
@@ -64,4 +85,8 @@ export { Game };
 
 /*
  * TODO:
+
+ * WordScreen -> screen where the current word playing is shown
+ * besides the options menu to choose the correct article in German
+ * set the current word through the useState "currentWord"
 */

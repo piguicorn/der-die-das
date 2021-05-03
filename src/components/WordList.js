@@ -26,7 +26,7 @@ const WordList = ({setScreen, deleteWord, editWord, words}) => {
                 <button onClick={() => setScreen('home')}>X</button>
             </div>
             <div className="screen__main">
-                <p><span>Total:</span> 4 words</p>
+                <p><span>Total:</span> {words.length} words</p>
 
                 <ul>
                     <li>
